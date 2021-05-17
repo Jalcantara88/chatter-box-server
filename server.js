@@ -4,10 +4,18 @@ const express = require('express');
 const socketIO = require('socket.io');
 var cors = require('cors');
 
-const server = express()
-  .use(cors())
+const server = express();
+  server.options('/', function (req, res) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader("Access-Control-Allow-Headers", "*");
+    res.end();
+  });
+  server.use(cors());
   //.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+  server.listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+  
 
 const io = socketIO(server);
 
