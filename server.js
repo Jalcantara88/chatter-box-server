@@ -16,20 +16,18 @@ const server = express();
   //server.use(cors());
 
   //server.options('*', cors());
-  //.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  
-
-  
-
+  server.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+   
+/*
 const io = socketIO(server, {
   cors: {
     origin: false,
     //methods: ["GET", "POST"]
   }
 });
+*/
 
 server.listen(PORT, () => console.log(`Listening on ${PORT}`));
-
 
 io.on('connection', (socket) => {
     console.log('Client connected');
