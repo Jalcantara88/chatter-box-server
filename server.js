@@ -13,15 +13,20 @@ const server = express();
     res.end();
   });
   */
-  server.use(cors());
+  //server.use(cors());
 
-  server.options('*', cors());
+  //server.options('*', cors());
   //.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
   
 
   
 
-const io = socketIO(server);
+const io = socketIO(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
 
 server.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
