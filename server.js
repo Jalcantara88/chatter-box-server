@@ -14,9 +14,9 @@ const app = express();
     res.end();
   });
   */
-  app.use(cors());
+  //app.use(cors());
 
-  app.options('*', cors());
+  //app.options('*', cors());
 //.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
 
 /*
@@ -38,7 +38,12 @@ const server = app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 
 
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: "https://chatter-box-io.netlify.app",
+    methods: ["GET", "POST"]
+  }
+});
 
 io.on('connection', (socket) => {
     console.log('Client connected');
