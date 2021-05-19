@@ -2,7 +2,7 @@ const PORT = process.env.PORT || 3000;
 //const path = require("path");
 
 const express = require('express');
-//const socketIO = require('socket.io');
+const socketIO = require('socket.io');
 var cors = require('cors');
 
 const app = express();
@@ -38,7 +38,7 @@ const server = app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 
 
-const io = require('socket.io')(server, {
+const io = socketIO(server, {
   cors: {
     origin: "https://chatter-box-io.netlify.app",
     methods: ["GET", "POST"]
