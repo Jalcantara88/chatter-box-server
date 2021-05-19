@@ -1,11 +1,11 @@
 const PORT = process.env.PORT || 3000;
-const path = require("path");
+//const path = require("path");
 
 const express = require('express');
-const socketIO = require('socket.io');
+//const socketIO = require('socket.io');
 var cors = require('cors');
 
-const server = express();
+const app = express();
 /*
   server.options('/socket.io', function (req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -14,7 +14,7 @@ const server = express();
     res.end();
   });
   */
-  server.use(cors());
+  app.use(cors());
 
   //server.options('*', cors());
 //.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
@@ -34,11 +34,11 @@ const io = socketIO(server, {
 });
 */
 
-server.listen(PORT, () => console.log(`Listening on ${PORT}`));
+const server = app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 
 
-const io = socketIO(server);
+const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
     console.log('Client connected');
