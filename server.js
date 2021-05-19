@@ -3,7 +3,9 @@ const PORT = process.env.PORT || 3000;
 
 const express = require('express');
 const socketIO = require('socket.io');
-var cors = require('cors');
+//var cors = require('cors');
+
+var allUsers = [];
 
 const app = express();
 /*
@@ -56,6 +58,11 @@ io.on('connection', (socket) => {
       socket.broadcast.emit("message", msg);
       
   });
+
+    socket.on("user-joined",(username) => {
+      allUsers.push(username);
+      socket.emit("all-users-update", allUsers);
+    })
 
 
     socket.on('disconnect', () => console.log('Client disconnected'));
