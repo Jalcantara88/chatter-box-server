@@ -16,7 +16,7 @@ const app = express();
   */
   app.use(cors());
 
-  //server.options('*', cors());
+  app.options('*', cors());
 //.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
 
 /*
