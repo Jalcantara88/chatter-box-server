@@ -1,6 +1,6 @@
 const PORT = process.env.PORT || 3000;
 const path = require("path");
-const INDEX = '/index.js';
+
 const express = require('express');
 const socketIO = require('socket.io');
 var cors = require('cors');
