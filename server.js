@@ -62,6 +62,7 @@ io.on('connection', (socket) => {
     socket.on("user-joined",(username) => {
 
       allUsers.push(username);
+      socket.emit("all-users-update", allUsers);
       socket.broadcast.emit("all-users-update", allUsers);
 
     })
