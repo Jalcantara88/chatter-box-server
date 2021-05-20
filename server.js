@@ -60,8 +60,9 @@ io.on('connection', (socket) => {
   });
 
     socket.on("user-joined",(username) => {
+      const newUser = { socket: socket, username: username};
 
-      allUsers.push(username);
+      allUsers.push(newUser);
       socket.emit("all-users-update", allUsers);
       socket.broadcast.emit("all-users-update", allUsers);
 
@@ -73,7 +74,10 @@ io.on('connection', (socket) => {
     })
 
 
-    socket.on('disconnect', () => console.log('Client disconnected'));
+    socket.on('disconnect', () => {
+      allUsers.splice(allUsers.findIndex(item => item.socket.id), 1);
+      socket.broadcast.emit("all-users-update", allUsers);
+      console.log('Client disconnected');});
   });
 
 //setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
