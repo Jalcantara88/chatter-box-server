@@ -49,7 +49,8 @@ const io = socketIO(server, {
 
 io.on('connection', (socket) => {
     console.log('Client connected');
-    console.log(socket.id);
+    
+    newSocket.emit("socket-id", socket.id);
 
     //socket.emit("connect", socket);
 
