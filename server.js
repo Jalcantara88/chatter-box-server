@@ -50,7 +50,7 @@ const io = socketIO(server, {
 io.on('connection', (socket) => {
     console.log('Client connected');
 
-    socket.emit("connect", socket);
+    //socket.emit("connect", socket);
 
 
     socket.on("message-submitted", (msg) => {
