@@ -49,12 +49,11 @@ const io = socketIO(server, {
 
 io.on('connection', (socket) => {
     console.log('Client connected');
+    console.log(socket.id);
 
     //socket.emit("connect", socket);
 
-    socket.on("connect", (socket) => {
-      const sessionID = socket.id;
-    })
+   
 
 
     socket.on("message-submitted", (msg) => {
