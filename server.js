@@ -52,6 +52,10 @@ io.on('connection', (socket) => {
 
     //socket.emit("connect", socket);
 
+    socket.on("connect", (socket) => {
+      const sessionID = socket.id;
+    })
+
 
     socket.on("message-submitted", (msg) => {
       //echo the message back to the user
