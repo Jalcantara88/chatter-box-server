@@ -50,6 +50,9 @@ const io = socketIO(server, {
 io.on('connection', (socket) => {
     console.log('Client connected');
 
+    socket.emit("connect", socket);
+
+
     socket.on("message-submitted", (msg) => {
       //echo the message back to the user
       socket.emit("message", msg);
@@ -61,7 +64,7 @@ io.on('connection', (socket) => {
 
     socket.on("user-joined",(username) => {
       //const newUser = { socket: socket, username: username};
-
+      
       allUsers.push(username);
       socket.emit("all-users-update", allUsers);
       socket.broadcast.emit("all-users-update", allUsers);
