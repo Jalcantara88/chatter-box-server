@@ -7,6 +7,26 @@ const socketIO = require('socket.io');
 
 var allUsers = [];
 
+const [allRooms, setAllRooms] = useState([
+  /*
+  {
+      name: "some room",
+      users: [
+          {
+              username: "",
+              socketId: ""
+          }
+      ],
+      allMessages: [
+          {
+              username: "john doe",
+              message: ""
+          } 
+      ]
+  }
+  */
+]);
+
 const app = express();
 /*
   server.options('/socket.io', function (req, res) {
@@ -64,7 +84,17 @@ io.on('connection', (socket) => {
       //broadcast message to everyone else
       socket.broadcast.emit("message", msg);
       
-  });
+    });
+
+    socket.on("get-all-rooms", () => {
+      socket.emit("all-rooms-update", allRooms);
+    });
+
+    socket.on("room-created", (room) => {
+      const newAllRooms = allRooms.push(room);
+      setAllRooms(newAllRooms);
+
+    });
 
     socket.on("user-joined",(username) => {
       //const newUser = { socket: socket, username: username};
