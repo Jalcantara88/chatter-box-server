@@ -103,12 +103,12 @@ io.on('connection', (socket) => {
       socket.emit("all-users-update", allUsers);
       socket.broadcast.emit("all-users-update", allUsers);
 
-    })
+    });
 
     socket.on("user-left", (username) => {
       allUsers = allUsers.filter(item => item != username);
       socket.broadcast.emit("all-users-update", allUsers);
-    })
+    });
 
 
     socket.on('disconnect', () => {
