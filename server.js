@@ -7,26 +7,6 @@ const socketIO = require('socket.io');
 
 var allUsers = [];
 
-const [allRooms, setAllRooms] = useState([
-  /*
-  {
-      name: "some room",
-      users: [
-          {
-              username: "",
-              socketId: ""
-          }
-      ],
-      allMessages: [
-          {
-              username: "john doe",
-              message: ""
-          } 
-      ]
-  }
-  */
-]);
-
 const app = express();
 /*
   server.options('/socket.io', function (req, res) {
@@ -69,12 +49,10 @@ const io = socketIO(server, {
 
 io.on('connection', (socket) => {
     console.log('Client connected');
-    
-    //newSocket.emit("socket-id", socket.id);
 
     //socket.emit("connect", socket);
 
-   
+
 
 
     socket.on("message-submitted", (msg) => {
@@ -84,17 +62,7 @@ io.on('connection', (socket) => {
       //broadcast message to everyone else
       socket.broadcast.emit("message", msg);
       
-    });
-
-    socket.on("get-all-rooms", () => {
-      socket.emit("all-rooms-update", allRooms);
-    });
-
-    socket.on("room-created", (room) => {
-      const newAllRooms = allRooms.push(room);
-      setAllRooms(newAllRooms);
-
-    });
+  });
 
     socket.on("user-joined",(username) => {
       //const newUser = { socket: socket, username: username};
@@ -103,12 +71,12 @@ io.on('connection', (socket) => {
       socket.emit("all-users-update", allUsers);
       socket.broadcast.emit("all-users-update", allUsers);
 
-    });
+    })
 
     socket.on("user-left", (username) => {
       allUsers = allUsers.filter(item => item != username);
       socket.broadcast.emit("all-users-update", allUsers);
-    });
+    })
 
 
     socket.on('disconnect', () => {
