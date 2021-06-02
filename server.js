@@ -52,7 +52,9 @@ io.on('connection', (socket) => {
 
     //socket.emit("connect", socket);
 
-
+    socket.on("join-room", (roomName) => {
+      socket.join(roomName);
+    });
 
 
     socket.on("message-submitted", (msg) => {
