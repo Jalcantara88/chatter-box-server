@@ -56,6 +56,10 @@ io.on('connection', (socket) => {
       socket.join(roomName);
     });
 
+    socket.on("leave-rom", (roomName) => {
+      socket.leave(roomName);
+    });
+
 
     socket.on("message-submitted", (msg) => {
       //echo the message back to the user
