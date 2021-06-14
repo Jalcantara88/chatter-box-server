@@ -67,11 +67,11 @@ io.on('connection', (socket) => {
     });
 
 
-    socket.on("message-submitted", (msg, username, roomName) => {
+    socket.on("message-submitted", (message, username, roomName) => {
       //echo the message back to the user
       const newMessage = {
-        uername: username,
-        message: msg
+        username,
+        message
       };
       //socket.emit("message", msg);
       socket.to(roomName).emit("message", newMessage);
