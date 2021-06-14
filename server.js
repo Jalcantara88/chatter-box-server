@@ -73,11 +73,11 @@ io.on('connection', (socket) => {
         username,
         message
       };
-      //socket.emit("message", msg);
-      socket.to(roomName).emit("message", newMessage);
+      socket.emit("message", msg);
+      //socket.to(roomName).emit("message", newMessage);
       
       //broadcast message to everyone else
-      //socket.broadcast.emit("message", msg);
+      socket.broadcast.emit("message", msg);
       
   });
 
