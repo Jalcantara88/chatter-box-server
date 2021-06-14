@@ -36,6 +36,8 @@ const io = socketIO(server, {
 });
 */
 
+var rooms = [];
+
 const server = app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 
@@ -56,14 +58,19 @@ io.on('connection', (socket) => {
       socket.join(roomName);
     });
 
-    socket.on("leave-rom", (roomName) => {
+    socket.on("leave-room", (roomName) => {
       socket.leave(roomName);
     });
 
+    socket.on("create-room", (roomName) => {
+      rooms.push(roomName);
+    });
 
-    socket.on("message-submitted", (msg) => {
+
+    socket.on("message-submitted", (msg, roomName) => {
       //echo the message back to the user
-      socket.emit("message", msg);
+      //socket.emit("message", msg);
+      socket.to(roomName).emit("message", msg);
       
       //broadcast message to everyone else
       socket.broadcast.emit("message", msg);
