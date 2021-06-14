@@ -67,7 +67,7 @@ io.on('connection', (socket) => {
     });
 
 
-    socket.on("message-submitted", (message, username, roomName) => {
+    socket.on("message-submitted", (msg) => {
       //echo the message back to the user
       const newMessage = {
         username,
